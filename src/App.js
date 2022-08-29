@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Message from './components/Message';
+import ActionButton from './components/ActionButton';
+import ThemeSelector from './components/ThemeSelector';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0
+    };
+  }
+
+  incrementCounter = () => {
+    this.setState({ counter: this.state.counter + 1 });
+  }
+
+  render() {
+    return (
+      <ThemeSelector>
+        <div className="m-2 text-center">
+          <Message theme="primary" message={ `Counter: ${this.state.counter}` } />
+          <ActionButton theme="secondary" text="Increment" callback={ this.incrementCounter } />
+        </div>
+      </ThemeSelector>
+    );
+  }
 }
-
-export default App;
