@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 // import ThemeSelector from './components/ThemeSelector';
 import GeneralList from './components/GeneralList';
 import SortedList from './components/SortedList';
-import ProFeature from './components/ProFeature';
+// import ProFeature from './components/ProFeature';
 // import { ProController } from './components/ProController';
 // import LogToConsole from './components/LogToConsole';
+import { ProModeContext } from './components/ProModeContext';
 
 
 // const ProList = ProFeature(SortedList);
@@ -20,7 +21,10 @@ export default class App extends Component {
       // counter: 0
       names: ["Zoe", "Bob", "Alice", "Dora", "Joe"],
       cities: ["London", "New York", "Paris", "Milan", "Boston"],
-      proMode: false
+      // proMode: false
+      proContextData: {
+        proMode: true
+      }
     };
   }
 
@@ -29,7 +33,9 @@ export default class App extends Component {
   // }
 
   toggleProMode = () => {
-    this.setState({ proMode: !this.state.proMode });
+    let mode = { ...this.state.proContextData };
+    mode.proMode = !mode.proMode;
+    this.setState({ proContextData: { proMode: mode.proMode } });
   }
 
   render() {
@@ -38,7 +44,7 @@ export default class App extends Component {
         <div className="row">
           <div className="col-12 text-center p-2">
             <div className="form-check">
-              <input type="checkbox" className="form-check-input" value={ this.state.proMode } onChange={ this.toggleProMode } />
+              <input type="checkbox" className="form-check-input" value={ this.state.proContextData.proMode } onChange={ this.toggleProMode } />
               <label className="form-check-label">Pro Mode</label>
             </div>
           </div>
@@ -48,14 +54,17 @@ export default class App extends Component {
             <GeneralList list={ this.state.names } theme="primary" />
           </div>
           <div className="col-6">
-            {/* <SortedList list={ this.state.names } /> */}
-            <ProFeature pro={ this.state.proMode } render={
+            <h3>{ this.state.proContextData.proMode }</h3>
+            <ProModeContext.Provider value={ this.state.proContextData }>
+              <SortedList list={ this.state.names } />
+            </ProModeContext.Provider>
+            {/* <ProFeature pro={ this.state.proMode } render={
               text =>
                 <>
                   <h4 className="text-center">{ text }</h4>
                   <SortedList list={ this.state.names } />
                 </>
-            } />
+            } /> */}
           </div>
           {/* <div className="col-3">
             <GeneralList list={ this.state.names } theme="primary" />
