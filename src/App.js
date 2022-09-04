@@ -5,9 +5,13 @@ import React, { Component } from 'react';
 import GeneralList from './components/GeneralList';
 import SortedList from './components/SortedList';
 import ProFeature from './components/ProFeature';
+// import { ProController } from './components/ProController';
+// import LogToConsole from './components/LogToConsole';
 
 
-const ProList = ProFeature(SortedList);
+// const ProList = ProFeature(SortedList);
+// const ProList = ProController(SortedList);
+// const ProList = ProController(LogToConsole(SortedList, "Sorted", true, true, true));
 
 export default class App extends Component {
   constructor(props) {
@@ -40,24 +44,33 @@ export default class App extends Component {
           </div>
         </div>
         <div className="row">
-          {/* <div className="col-6">
+          <div className="col-6">
             <GeneralList list={ this.state.names } theme="primary" />
           </div>
           <div className="col-6">
-            <SortedList list={ this.state.names } />
-          </div> */}
-          <div className="col-3">
+            {/* <SortedList list={ this.state.names } /> */}
+            <ProFeature pro={ this.state.proMode } render={
+              text =>
+                <>
+                  <h4 className="text-center">{ text }</h4>
+                  <SortedList list={ this.state.names } />
+                </>
+            } />
+          </div>
+          {/* <div className="col-3">
             <GeneralList list={ this.state.names } theme="primary" />
           </div>
           <div className="col-3">
             <ProList list={ this.state.names } pro={ this.state.proMode } />
+            <ProList list={ this.state.names } />
           </div>
           <div className="col-3">
             <GeneralList list={ this.state.cities } theme="secondary" />
           </div>
           <div className="col-3">
             <ProList list={ this.state.cities } pro={ this.state.proMode } />
-          </div>
+            <ProList list={ this.state.names } />
+          </div> */}
         </div>
      </div>
     );
