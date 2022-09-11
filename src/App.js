@@ -43,12 +43,10 @@ export default class App extends Component {
   render() {
     return (
      <div className="container-fluid">
+      <ProModeContext.Provider value={ this.state.proContextData }>
         <div className="row">
           <div className="col-12 text-center p-2">
-            <div className="form-check">
-              <input type="checkbox" className="form-check-input" value={ this.state.proContextData.proMode } onChange={ this.toggleProMode } />
-              <label className="form-check-label">Pro Mode</label>
-            </div>
+            <ProModeToggle label="Pro Mode" />
           </div>
         </div>
         <div className="row">
@@ -56,33 +54,10 @@ export default class App extends Component {
             <GeneralList list={ this.state.names } theme="primary" />
           </div>
           <div className="col-6">
-            <h3>{ this.state.proContextData.proMode }</h3>
-            <ProModeContext.Provider value={ this.state.proContextData }>
-              <SortedList list={ this.state.names } />
-            </ProModeContext.Provider>
-            {/* <ProFeature pro={ this.state.proMode } render={
-              text =>
-                <>
-                  <h4 className="text-center">{ text }</h4>
-                  <SortedList list={ this.state.names } />
-                </>
-            } /> */}
+            <SortedList list={ this.state.names } />
           </div>
-          {/* <div className="col-3">
-            <GeneralList list={ this.state.names } theme="primary" />
-          </div>
-          <div className="col-3">
-            <ProList list={ this.state.names } pro={ this.state.proMode } />
-            <ProList list={ this.state.names } />
-          </div>
-          <div className="col-3">
-            <GeneralList list={ this.state.cities } theme="secondary" />
-          </div>
-          <div className="col-3">
-            <ProList list={ this.state.cities } pro={ this.state.proMode } />
-            <ProList list={ this.state.names } />
-          </div> */}
         </div>
+      </ProModeContext.Provider>
      </div>
     );
   }
