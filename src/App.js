@@ -8,6 +8,7 @@ import SortedList from './components/SortedList';
 // import { ProController } from './components/ProController';
 // import LogToConsole from './components/LogToConsole';
 import { ProModeContext } from './components/ProModeContext';
+import ProModeToggle from './components/ProModeToggle';
 
 
 // const ProList = ProFeature(SortedList);
@@ -23,7 +24,8 @@ export default class App extends Component {
       cities: ["London", "New York", "Paris", "Milan", "Boston"],
       // proMode: false
       proContextData: {
-        proMode: true
+        proMode: true,
+        toggleProMode: this.toggleProMode
       }
     };
   }
